@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenue sur la page {{ slug }}</h1>
+    <h1>{% if slug == -1 %}
+        Article sans titre
+        {% else %}
+        {{ slug }}
+        {% endif %}
+    </h1>
 {% endblock %}

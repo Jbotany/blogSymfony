@@ -28,10 +28,13 @@ class BlogController extends AbstractController
     /**
      * @param $slug
      * @return Response
-     * @Route("/blog/show/{slug}", name="show")
+     * @Route("/blog/show/{slug<([0-9]|[a-z]|\-)+>}", name="show")
      */
-    public function show($slug)
+    public function show($slug = -1)
     {
+
+        $slug = str_replace("-"," ", $slug);
+        $slug = ucwords($slug);
         return $this->render('show.html.twig', [
             'slug' => $slug,
         ]);
