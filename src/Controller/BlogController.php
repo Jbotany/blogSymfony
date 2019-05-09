@@ -20,4 +20,15 @@ class BlogController extends AbstractController
             'owner' => 'Thomas',
         ]);
     }
+
+
+    /**
+     * @Route("/blog/show/{slug}, name="blog_show" )
+     */
+    public function show($slug)
+    {
+        return $this->render('blog/show.html.twig', [
+            'slug' => $slug,
+        ]);
+    }
 }
