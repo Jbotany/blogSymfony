@@ -17,7 +17,6 @@ class BlogController extends AbstractController
      * Show all row from article's entity
      *
      * @Route("/blog", name="blog_index")
-     * @Route("/blog",name="homepage")
      * @return Response A response instance
      */
     public function index(): Response
@@ -36,6 +35,7 @@ class BlogController extends AbstractController
             'blog/index.html.twig',
             ['articles' => $articles]
         );
+
     }
 
 
@@ -44,7 +44,7 @@ class BlogController extends AbstractController
      *
      * @param string $slug The slugger
      *
-     * @Route("/{slug<^[a-z0-9-]+$>}",
+     * @Route("/blog/show/{slug<^[a-z0-9-]+$>}",
      *     defaults={"slug" = null},
      *     name="blog_show")
      *  @return Response A response instance
@@ -78,5 +78,29 @@ class BlogController extends AbstractController
                 'slug' => $slug,
             ]
         );
+    }
+
+    /**
+     * @Route("/category/{categoryName}", name="show_category")
+     *
+     * @return Response
+     */
+    public function showByCategory(string $categoryName) : Response
+    {
+
+        $category = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findOneBy(['name' => mb_strtolower($categoryName)]);
+
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findBy(['category' => $category]);
+
+        return $this->render(
+            'blog/category.html.twig',
+            [
+                'articles' => $articles,
+                'category' => $category
+        ]);
     }
 }

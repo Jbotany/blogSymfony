@@ -12,6 +12,7 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="app_index")
+     * @Route("/",name="homepage")
      */
     public function index()
     {
