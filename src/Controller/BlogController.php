@@ -88,6 +88,11 @@ class BlogController extends AbstractController
     public function showByCategory(string $categoryName) : Response
     {
 
+        if (!$categoryName) {
+            throw $this
+                ->createNotFoundException('No category name has been set');
+        }
+
         //$category = $categoryName->getCategory();
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
