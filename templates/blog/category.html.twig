@@ -16,7 +16,7 @@
         </thead>
         <tbody>
 
-        {% for article in articles|slice(0,3)|reverse %}
+        {% for article in category.articles|slice(0,3)|reverse %}
         <tr>
             <td>{{ article.id }}</td>
             <td>{{ article.title }}</td>

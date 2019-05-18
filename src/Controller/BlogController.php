@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 class BlogController extends AbstractController
@@ -102,12 +103,11 @@ class BlogController extends AbstractController
             ->getRepository(Article::class)
             ->findBy(['category' => $category]);*/
 
-        $articles = $category->getArticles();
+        //$articles = $category->getArticles();
 
         return $this->render(
             'blog/category.html.twig',
             [
-                'articles' => $articles,
                 'category' => $category
         ]);
     }
