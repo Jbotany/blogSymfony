@@ -11,7 +11,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Form\CategoryType;
-//use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class BlogController extends AbstractController
@@ -22,7 +22,7 @@ class BlogController extends AbstractController
      * @Route("/blog", name="blog_index")
      * @return Response A response instance
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -36,6 +36,9 @@ class BlogController extends AbstractController
 
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+
 
         return $this->render(
             'blog/index.html.twig',

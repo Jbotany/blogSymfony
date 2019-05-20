@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(formCategory) }}
+    {{ form_row(formCategory.name) }}
+    <button type="submit" name="btnValid">Valider</button>
+    {{ form_end(formCategory) }}
+
+{%  endblock %}
