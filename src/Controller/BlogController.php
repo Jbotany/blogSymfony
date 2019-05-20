@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Form\ArticleSearchType;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class BlogController extends AbstractController
@@ -32,9 +34,16 @@ class BlogController extends AbstractController
             );
         }
 
+        $form = $this->createForm(
+            ArticleSearchType::class,
+            null,
+            ['method' => Request::METHOD_GET]
+        );
+
         return $this->render(
             'blog/index.html.twig',
-            ['articles' => $articles]
+            ['articles' => $articles,
+            'form' => $form->createView()]
         );
 
     }
