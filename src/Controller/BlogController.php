@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -136,4 +137,17 @@ class BlogController extends AbstractController
 //                'category' => $category
 //        ]);
 //    }
+
+//    /**
+//     * @Route ("/tag/{id}", name="category_tag")
+//     * @return Response
+//     */
+//    public function tag()
+//    {
+//        $tag = new Tag();
+//        return $this->render('blog/tag.html.twig',[
+//            'tag' => $tag
+//        ]);
+//    }
+
 }

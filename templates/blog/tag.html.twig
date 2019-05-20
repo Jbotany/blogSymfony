@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ slug }}{% endblock %}
-
-
 {% block body %}
 
     <div>
@@ -15,7 +12,6 @@
         Back to homepage.
     </a>
 
-    <br>
     <strong>Tags :</strong>
     <ul>
         {% for tag in article.tags %}

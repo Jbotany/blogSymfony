@@ -39,4 +39,5 @@ class CategoryController extends AbstractController
             'formCategory' => $form->createView()
         ]);
     }
+
 }
