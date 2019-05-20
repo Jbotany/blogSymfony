@@ -81,34 +81,50 @@ class BlogController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/category/{categoryName}", name="show_category")
-     *
-     * @return Response
-     */
-    public function showByCategory(string $categoryName) : Response
+    /** @Route("/category/{name}", name="show_category")
+    *
+    * @return Response
+    */
+    public function showByCategory(Category $category) : Response
     {
-
-        if (!$categoryName) {
-            throw $this
-                ->createNotFoundException('No category name has been set');
-        }
-
-        //$category = $categoryName->getCategory();
-        $category = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findOneByName($categoryName);
-
-        /*$articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findBy(['category' => $category]);*/
-
-        //$articles = $category->getArticles();
 
         return $this->render(
             'blog/category.html.twig',
             [
                 'category' => $category
-        ]);
+            ]);
     }
+
+
+
+//    /**
+////     * @Route("/category/{categoryName}", name="show_category")
+////     *
+////     * @return Response
+////     */
+//    public function showByCategory(string $categoryName) : Response
+//    {
+//
+//        if (!$categoryName) {
+//            throw $this
+//                ->createNotFoundException('No category name has been set');
+//        }
+//
+//        //$category = $categoryName->getCategory();
+//        $category = $this->getDoctrine()
+//            ->getRepository(Category::class)
+//            ->findOneByName($categoryName);
+//
+//        /*$articles = $this->getDoctrine()
+//            ->getRepository(Article::class)
+//            ->findBy(['category' => $category]);*/
+//
+//        //$articles = $category->getArticles();
+//
+//        return $this->render(
+//            'blog/category.html.twig',
+//            [
+//                'category' => $category
+//        ]);
+//    }
 }
