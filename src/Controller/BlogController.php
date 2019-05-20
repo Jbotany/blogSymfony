@@ -138,16 +138,15 @@ class BlogController extends AbstractController
 //        ]);
 //    }
 
-//    /**
-//     * @Route ("/tag/{id}", name="category_tag")
-//     * @return Response
-//     */
-//    public function tag()
-//    {
-//        $tag = new Tag();
-//        return $this->render('blog/tag.html.twig',[
-//            'tag' => $tag
-//        ]);
-//    }
+    /**
+     * @Route ("/tag/{id}", name="category_tag")
+     * @return Response
+     */
+    public function tag(Tag $tag)
+    {
+        return $this->render('blog/tag.html.twig',[
+            'tag' => $tag
+        ]);
+    }
 
 }

@@ -2,22 +2,26 @@
 
 {% block body %}
 
-    <div>
-        <h1>Real article s title : {{ article.title }}</h1>
-        <h2>Category : {{ article.category.name }}</h2>
-        <p>{{ article.content }}</p>
-    </div>
+{#    <div>#}
+{#        <h1>Real article s title : {{ article.title }}</h1>#}
+{#        <h2>Category : {{ article.category.name }}</h2>#}
+{#        <p>{{ article.content }}</p>#}
+{#    </div>#}
 
-    <a href="{{ path('homepage') }}">
-        Back to homepage.
-    </a>
+{#    <a href="{{ path('homepage') }}">#}
+{#        Back to homepage.#}
+{#    </a>#}
 
     <strong>Tags :</strong>
     <ul>
-        {% for tag in article.tags %}
-            <li>{{ tag.name }} </li>
+        {% for article in tag.articles %}
+            <li>
+                <a href="{{ path('blog_show', {'slug': article.title|replace({' ':'-'})|lower}) }}">
+                    {{ article.title }}
+                </a>
+            </li>
         {% else %}
-            <li>No tags for this article</li>
+            <li>No articles for this tag</li>
         {% endfor %}
     </ul>
 
