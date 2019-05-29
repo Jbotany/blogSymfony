@@ -20,6 +20,6 @@ class Slugify
             }
         }
 
-        return str_replace(' ', '-', trim($result));
+        return strtolower(str_replace(' ', '-', trim($result)));
     }
 }
