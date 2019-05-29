@@ -32,10 +32,6 @@ class ArticleController extends AbstractController
     public function new(Request $request, Slugify $slugify): Response
     {
         $article = new Article();
-//        $slug = new Slug();
-//
-//        var_dump($article);die();
-
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -72,12 +68,15 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article): Response
+    public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $article->setSlug($slugify->generate($article->getTitle()));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_index', [
