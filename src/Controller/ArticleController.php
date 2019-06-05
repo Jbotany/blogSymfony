@@ -41,7 +41,8 @@ class ArticleController extends AbstractController
 
 
             $article->setSlug($slugify->generate($article->getTitle()));
-
+            $author = $this->getUser();
+            $article->setAuthor($author);
 
             $entityManager->persist($article);
             $entityManager->flush();
