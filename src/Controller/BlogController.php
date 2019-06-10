@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Entity\Category;
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -58,7 +57,7 @@ class BlogController extends AbstractController
      * @Route("/blog/show/{slug<^[a-z0-9-]+$>}",
      *     defaults={"slug" = null},
      *     name="blog_show")
-     *  @return Response A response instance
+     * @return Response A response instance
      */
     public function show(string $slug = 'Article sans titre') : Response
     {
@@ -91,8 +90,8 @@ class BlogController extends AbstractController
         );
     }
 
-    /** @Route("/category/{name}", name="show_category")
-    *
+    /**
+     * @Route("/category/{name}", name="show_category")
     * @return Response
     */
     public function showByCategory(Category $category) : Response

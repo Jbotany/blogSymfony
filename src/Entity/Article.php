@@ -159,4 +159,20 @@ class Article
 
         return $this;
     }
+
+    /**
+     * Is the given User the author of this Post?
+     *
+     * @return bool
+     */
+    public function isAuthor(User $user = null)
+    {
+        if ($this->getAuthor() != null) {
+
+            return $user && $user->getEmail() === $this->getAuthor()->getEmail();
+        }
+
+        return false;
+    }
+
 }
