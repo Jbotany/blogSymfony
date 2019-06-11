@@ -6,7 +6,7 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
-use App\Repository\UserRepository;
+//use App\Repository\UserRepository;
 use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +22,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="article_index", methods={"GET"})
      */
-    public function index(ArticleRepository $article, UserRepository $user): Response
+    public function index(ArticleRepository $article): Response
     {
         return $this->render('article/index.html.twig', [
-            'articles' => $article->findAll(),
+            'articles' => $article->findAllWithCategoriesAndTags(),
         ]);
     }
 

@@ -12,6 +12,7 @@
             <th>Title</th>
             <th>Content</th>
             <th>actions</th>
+            <th>Tags</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,11 @@
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
+                <p>
+                    {% for tag in article.tags %}
+                        {{ tag.name }}
+                    {% endfor %}
+                </p>
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     {% if is_granted('ROLE_AUTHOR') %}
