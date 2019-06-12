@@ -21,11 +21,11 @@
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
-                <p>
+                <td>
                     {% for tag in article.tags %}
                         {{ tag.name }}
                     {% endfor %}
-                </p>
+                </td>
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     {% if is_granted('ROLE_AUTHOR') %}
