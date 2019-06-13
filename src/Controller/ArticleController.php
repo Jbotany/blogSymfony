@@ -89,7 +89,8 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
-        if ($article->isAuthor($this->getUser()) | $this->isGranted(["ROLE_ADMIN"])) {
+
+        if (($article->getAuthor()->getId() == $this->getUser()->getId()) | $this->isGranted(["ROLE_ADMIN"])) {
             $form = $this->createForm(ArticleType::class, $article);
             $form->handleRequest($request);
         } else {
