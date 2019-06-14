@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
-//use App\Repository\UserRepository;
 use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/article")
@@ -22,8 +21,14 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="article_index", methods={"GET"})
      */
-    public function index(ArticleRepository $article): Response
+    public function index(ArticleRepository $article, SessionInterface $session): Response
     {
+        if (!$session->has('total')) {
+            $session->set('total', 0); // if total doesn’t exist in session, it is initialized.
+        }
+
+        $total = $session->get('total'); // get actual value in session with ‘total' key.
+
         return $this->render('article/index.html.twig', [
             'articles' => $article->findAllWithCategoriesAndTags(),
         ]);
@@ -50,6 +55,8 @@ class ArticleController extends AbstractController
 
             $entityManager->persist($article);
             $entityManager->flush();
+
+            $this->addFlash('success', 'The new article has been created');
 
             $messageContent = $this->renderView(
                 'mail/mail.html.twig', [
@@ -127,6 +134,8 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();
+
+            $this->addFlash('danger', 'The article has been successfully deleted');
         }
 
         return $this->redirectToRoute('article_index');

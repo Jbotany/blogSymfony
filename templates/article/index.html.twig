@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Article index</h1>
 
+    <a href="{{ path('article_new') }}">Create new article</a>
+
     <table class="table">
         <thead>
         <tr>
@@ -40,6 +42,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('article_new') }}">Create new</a>
 {% endblock %}

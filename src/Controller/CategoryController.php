@@ -38,6 +38,8 @@ class CategoryController extends AbstractController
             $manager->persist($category);
             $manager->flush();
 
+            $this->addFlash('success', 'The new category has been created');
+
             return $this->redirectToRoute('blog_index');
         }
 
